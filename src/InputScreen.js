@@ -15,7 +15,7 @@ function InputScreen({ onSubmitSuccess }) {
     };
 
     try {
-      await axios.post('http://localhost:8000/submit_question_and_documents', payload);
+      await axios.post('http://factai-alb1-1373833785.us-east-2.elb.amazonaws.com/api/submit_question_and_documents', payload);
       setStatus('Submitted! Processing...');
       onSubmitSuccess();  // Callback to notify App of successful submission
     } catch (error) {

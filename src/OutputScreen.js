@@ -8,7 +8,7 @@ function OutputScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:8000/get_question_and_facts');
+        const { data } = await axios.get('http://factai-alb1-1373833785.us-east-2.elb.amazonaws.com/api/get_question_and_facts');
         if (data.status === 'done') {
           setFacts(data.facts);
           setStatus('');

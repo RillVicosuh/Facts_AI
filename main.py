@@ -18,12 +18,12 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",  # Add here the URL where your frontend is hosted
-    "https://yourforntendurl.com",  # Example of how to add a production domain
+    "http://factai-alb1-1373833785.us-east-2.elb.amazonaws.com/",  # Example of how to add a production domain
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Lists of origins that should be allowed to make requests
+    allow_origins=["*"],  # Lists of origins that should be allowed to make requests
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
@@ -93,7 +93,7 @@ async def process_and_update_db(question, document_urls):
         print("Error in processing task:", e)
         traceback.print_exc()
 
-@app.post("/submit_question_and_documents")
+@app.post("/api/submit_question_and_documents")
 async def submit_question_and_documents(background_tasks: BackgroundTasks, data: QuestionDocuments):
     global db
     db["question"] = data.question
@@ -103,7 +103,7 @@ async def submit_question_and_documents(background_tasks: BackgroundTasks, data:
     background_tasks.add_task(process_and_update_db, data.question, data.documents)
     return {"message": "Question and documents submitted"}
 
-@app.get("/get_question_and_facts")
+@app.get("/api/get_question_and_facts")
 async def get_question_and_facts():
     if db["status"] == "idle":
         raise HTTPException(status_code=404, detail="No question submitted")
