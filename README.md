@@ -1,5 +1,7 @@
 # AI Fact Extractor
 
+### Website: http://factai-alb1-1373833785.us-east-2.elb.amazonaws.com/
+
 ## Overview
 This web application is designed to extract relevant facts from a series of call logs in response to a user-provided question. Utilizing GPT-4, the application processes textual call log data fetched from specified URLs and distills this information into concise, actionable facts.
 
